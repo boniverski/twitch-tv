@@ -1,41 +1,68 @@
 $twitch-color: #6441A4;
-@mixin box-shadow($color) {
-  box-shadow:
-  1px 1px 0 $color,
-  2px 2px 0 $color,
-  3px 3px 0 $color,
-  4px 4px 0 $color,
-  5px 5px 0 $color,
-  6px 6px 0 $color;
+$online: #29FEE0;
+$offline: #FF6063;
+$all: #FAE840;
+$text-color: #FDFDFD;
+@mixin box-shadow($shadow...) {
+  -webkit-box-shadow: $shadow;
+     -moz-box-shadow: $shadow;
+          box-shadow: $shadow;
 }
 
-body {
-  background-color: #F2F2F2 !important;
-}
+* {font-family: Comfortaa, Helvetica, sans-serif;}
+body {background-color: #2D2E40 !important;}
 
 .header {
-  @include box-shadow($twitch-color);
-  background-color: #FDFDFD;
-  border: 5px solid $twitch-color;
+  background-color: #3D3D55;
+  border-radius: 5px;
+  @include box-shadow(0 1px 1px rgba(0,0,0,0.1), 0 1px 10px rgba(0,0,0,0.1));
   max-width: 600px;
   margin: 1em;
-  .logo {
-    margin: 1em 0;
+  padding: 0 10px !important;
+  .heading {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    .logo {
+      color: $text-color;
+      flex-grow: 0;
+      font-size: 40px;
+      height: 30px;
+      margin: 0.25em 0.45em 0 0.2em;
+    }
+    input {
+      background: #454662;
+      border: none;
+      border-radius: 3px;
+      color: $text-color;
+      flex-grow: 2;
+      font-size: 15px;
+      height: 40px;
+      margin: .5em 0;
+      padding: 0 0.8em;
+    }
+    span {
+      color: white;
+      right: 15px;
+      top: 18px;
+      position: absolute;
+    }
   }
   .availability {
     display: flex;
-    margin: 1em 0;
+    margin-top: 0.5em;
     padding: 0;
       button {
-        flex-grow: 1;
-        border: 0;
+        background: none;
+        border: none;
+        color: $text-color;
+        flex: 1 0 110px;
+        height: 2em;
+        padding-bottom: 1em;
+        transition: all .12s ease-in-out;
       }
+      .availability--on:hover {box-shadow: inset 0 -3px 0 0 $online};
+      .availability--off:hover {box-shadow: inset 0 -3px 0 0 $offline};
+      .availability--all:hover {box-shadow: inset 0 -3px 0 0 $all};
   }
-}
-
-.availability--on {
-  background: #96C93D;
-}
-.availability--off {
-  background: #E74548;
 }
