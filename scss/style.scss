@@ -14,12 +14,21 @@ $radius: 0.25em;
 /*----------------------------*/
 
 * {
+  box-sizing: border-box;
   font-family: Comfortaa, Helvetica, sans-serif;
   text-decoration: none !important;
 }
 
-body {background-color: $background !important;}
-.container {max-width: 600px;}
+body {
+  background: $background !important;
+  background-image: url("../image/play.png") !important;
+  background-repeat: repeat;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+}
 
 .section {
   background-color: $section;
@@ -78,17 +87,18 @@ body {background-color: $background !important;}
 }
 
 .main {
-  padding: 0.8em 0.8em !important;
+  padding: 0.4em 0.4em !important;
   .user{
       background: $white;
       border-radius: $radius;
       display: flex;
+      margin: 0.5em;
       padding: 0.6em;
       position: relative;
       .user__avatar {
         flex-grow: 0;
-        max-height: 8em;
-        max-width: 8em;
+        max-height: 100px;
+        max-width: 100px;
       }
       .user__card {
         flex-grow: 2;

@@ -1,14 +1,18 @@
 /*--- VARIABLES AND MIXINS ---*/
 /*----------------------------*/
 * {
+  box-sizing: border-box;
   font-family: Comfortaa, Helvetica, sans-serif;
   text-decoration: none !important; }
 
 body {
-  background-color: #2D2E40 !important; }
+  background: #2D2E40 !important;
+  background-image: url("../image/play.png") !important;
+  background-repeat: repeat; }
 
 .container {
-  max-width: 600px; }
+  max-width: 600px;
+  margin: 0 auto; }
 
 .section {
   background-color: #3D3D55;
@@ -65,17 +69,18 @@ body {
       box-shadow: inset 0 -3px 0 0 #FAE840; }
 
 .main {
-  padding: 0.8em 0.8em !important; }
+  padding: 0.4em 0.4em !important; }
   .main .user {
     background: #FDFDFD;
     border-radius: 0.25em;
     display: flex;
+    margin: 0.5em;
     padding: 0.6em;
     position: relative; }
     .main .user .user__avatar {
       flex-grow: 0;
-      max-height: 8em;
-      max-width: 8em; }
+      max-height: 100px;
+      max-width: 100px; }
     .main .user .user__card {
       flex-grow: 2;
       padding: 1em 0 0 1em; }
