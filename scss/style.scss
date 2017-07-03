@@ -1,48 +1,58 @@
-$twitch-color: #6441A4;
-$online: #29FEE0;
-$offline: #FF6063;
+/*--- VARIABLES AND MIXINS ---*/
+$background: #2D2E40;
+$section: #3D3D55;
+$online: #96C93D;
+$offline: #E74548;
 $all: #FAE840;
-$text-color: #FDFDFD;
+$white: #FDFDFD;
+$radius: 0.25em;
 @mixin box-shadow($shadow...) {
   -webkit-box-shadow: $shadow;
      -moz-box-shadow: $shadow;
           box-shadow: $shadow;
 }
+/*----------------------------*/
 
-* {font-family: Comfortaa, Helvetica, sans-serif;}
-body {background-color: #2D2E40 !important;}
+* {
+  font-family: Comfortaa, Helvetica, sans-serif;
+  text-decoration: none !important;
+}
 
-.header {
-  background-color: #3D3D55;
-  border-radius: 5px;
+body {background-color: $background !important;}
+.container {max-width: 600px;}
+
+.section {
+  background-color: $section;
+  border-radius: $radius;
   @include box-shadow(0 1px 1px rgba(0,0,0,0.1), 0 1px 10px rgba(0,0,0,0.1));
-  max-width: 600px;
   margin: 1em;
-  padding: 0 10px !important;
-  .heading {
+  padding: 0 0.7em !important;
+  .header__main {
     position: relative;
     display: flex;
     flex-wrap: wrap;
-    .logo {
-      color: $text-color;
+    .header__logo {
+      color: $white;
+      display: block;
       flex-grow: 0;
       font-size: 40px;
       height: 30px;
       margin: 0.25em 0.45em 0 0.2em;
     }
-    input {
+    .header__input {
       background: #454662;
       border: none;
-      border-radius: 3px;
-      color: $text-color;
+      border-radius: $radius;
+      color: $white;
+      display: block;
       flex-grow: 2;
       font-size: 15px;
       height: 40px;
       margin: .5em 0;
       padding: 0 0.8em;
     }
-    span {
-      color: white;
+    .header__search-icon {
+      color: $white;
       right: 15px;
       top: 18px;
       position: absolute;
@@ -52,17 +62,55 @@ body {background-color: #2D2E40 !important;}
     display: flex;
     margin-top: 0.5em;
     padding: 0;
-      button {
+      .availability__btn {
         background: none;
         border: none;
-        color: $text-color;
-        flex: 1 0 110px;
+        color: $white;
+        flex: 1 0 1em;
         height: 2em;
         padding-bottom: 1em;
         transition: all .12s ease-in-out;
       }
-      .availability--on:hover {box-shadow: inset 0 -3px 0 0 $online};
-      .availability--off:hover {box-shadow: inset 0 -3px 0 0 $offline};
-      .availability--all:hover {box-shadow: inset 0 -3px 0 0 $all};
+      .availability__btn--on:hover {box-shadow: inset 0 -3px 0 0 $online};
+      .availability__btn--off:hover {box-shadow: inset 0 -3px 0 0 $offline};
+      .availability__btn--all:hover {box-shadow: inset 0 -3px 0 0 $all};
   }
 }
+
+.main {
+  padding: 0.8em 0.8em !important;
+  .user{
+      background: $white;
+      border-radius: $radius;
+      display: flex;
+      padding: 0.6em;
+      position: relative;
+      .user__avatar {
+        flex-grow: 0;
+        max-height: 8em;
+        max-width: 8em;
+      }
+      .user__card {
+        flex-grow: 2;
+        padding: 1em 0 0 1em;
+      }
+      .user__availability {
+        position: absolute;
+        flex-grow: 1;
+        right: 1em;
+        top: 1em;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+      }
+      .user__availability--on {
+        background: $online;
+        box-shadow: 0px 0 10px rgba(150, 201, 61, 0.5);
+        display: none;
+      }
+      .user__availability--off {
+        background: $offline;
+        box-shadow: 0px 0 10px rgba(231, 69, 72, 0.5);
+      }
+    }
+  }

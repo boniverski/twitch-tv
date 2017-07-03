@@ -11,18 +11,31 @@
     <script type="text/javascript" src="js/script.js"></script>
   </head>
   <body>
-    <div class="container header">
-      <div class="wrapper">
-        <div class="heading">
-          <a href="index.html" title="Twitch.tv"><i class="fa fa-twitch logo" aria-hidden="true"></i></a>
-          <input type="search" name="" value="" placeholder="Find a streamer">
-          <span class="search-icon"><i class="fa fa-search" aria-hidden="true"></i>
+    <div class="container">
+
+      <div class="section header">
+        <div class="header__main">
+          <a href="index.html" title="Twitch.tv"><i class="fa fa-twitch header__logo" aria-hidden="true"></i></a>
+          <input class="header__input" type="search" name="" value="" placeholder="Find a streamer">
+          <span class="header__search-icon"><i class="fa fa-search" aria-hidden="true"></i>
 </span>
         </div>
         <div class="availability">
-          <button class="availability--all" type="button" name="button">All</button>
-          <button class="availability--on" type="button" name="button">Online</button>
-          <button class="availability--off" type="button" name="button">Offline</button>
+          <button class="availability__btn availability__btn--all" type="button" name="button">All</button>
+          <button class="availability__btn availability__btn--on" type="button" name="button">Online</button>
+          <button class="availability__btn availability__btn--off" type="button" name="button">Offline</button>
+        </div>
+      </div>
+
+      <div class="section main">
+        <div class="user">
+          <img class="user__avatar" src="http://tarch.in/img/placeholder/blogpost-placeholder-100x100.png" alt="">
+          <div class="user__card">
+            <h4 class="user--name"></h4>
+            <p class="user--stream-info"></p>
+          </div>
+          <span class="user__availability user__availability--on"></span>
+          <span class="user__availability user__availability--off"></span>
         </div>
       </div>
     </div>
