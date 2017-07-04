@@ -3,32 +3,33 @@ var users = ["MedryBW", "ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp", "s
 $(document).ready(function() {
   $(".availability__btn--all").addClass("active-all-btn");
 
-  users.forEach(function(channel){
+  users.forEach(function getUsers(channel){
     function makeURL(type, name) {
       return 'https://wind-bow.gomix.me/twitch-api/' + type + '/' + name + '?callback=?';
     };
 
 
     $.getJSON(makeURL("streams", channel), function(data) {
+
       var streamInfo, status;
+      var defaultAvatar = '../image/twitch-icon.png'
+
       if (data.stream === null) {
-        // user = data.stream.channel.display_name;
         streamInfo = "";
         status = "offline"
       } else if (data.stream === undefined) {
-        // user = data.stream.channel.display_name;
         streamInfo = "Account Closed";
         status = "offline"
       } else {
-        // user = data.stream.channel.display_name;
         streamInfo = data.stream.game;
         status = "online"
       };
       $.getJSON(makeURL("channels", channel), function(data) {
-        var avatar = data.logo != null ? data.logo : "http://4playernetwork.com/static/images/buttons/twitch-icon-lt.png",
+        var avatar = data.logo != null ? data.logo : defaultAvatar,
             user = data.display_name != null ? data.display_name : channel,
             game = streamInfo ? ' ' + data.status : "";
             url = data.url;
+            searchQuery = user.toLowerCase();
 
         var statusIndicator, addClass;
             if (status === "online") {
@@ -39,17 +40,24 @@ $(document).ready(function() {
               addClass = 'offline';
             }
 
-        var html = '<div class="user' + ' ' + addClass + '"><img class="user__avatar" src="' + avatar + '" alt="' + user + '"><div class="user__card"><a href="' + url + '" target="_blank"><h4 class="user--name">' + user + '</h4></a><p class="user--stream-info">' + game + '</p></div>' + statusIndicator + '</div>';
-            $(".main").append(html);
-
+        var html = '<div class="user' + ' ' + addClass + '" data-filter-item data-filter-name="' + searchQuery + '"><img class="user__avatar" src="' + avatar + '" alt="' + user + '"><div class="user__card"><a href="' + url + '" target="_blank"><h4 class="user--name">' + user + '</h4></a><p class="user--stream-info">' + game + '</p></div>' + statusIndicator + '</div>';
+        $(html).hide().appendTo(".main").fadeIn(300);
         $(".load-bar").hide(300);
+
+        $("[data-search]").on("keyup", function() {
+        	var searchVal = $(this).val();
+        	var filterItems = $("[data-filter-item]");
+        	if (searchVal != "") {
+        		filterItems.addClass("hidden");
+        		$('[data-filter-item][data-filter-name*="' + searchVal.toLowerCase() + '"]').removeClass("hidden");
+        	} else {
+        		filterItems.removeClass("hidden");
+        	}
+        });
       });
     });
   })
-
   $(".availability__btn").click(function() {
-      // $(".availability__btn--all").removeClass("active-all-btn");
-      // $(this).addClass("active-all-btn");
     var status = $(this).attr('id');
     if (status === "all") {
       $(".online, .offline").removeClass("hidden");
