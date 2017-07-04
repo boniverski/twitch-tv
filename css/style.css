@@ -5,6 +5,9 @@
   font-family: Comfortaa, Helvetica, sans-serif;
   text-decoration: none !important; }
 
+html {
+  overflow-y: scroll; }
+
 body {
   background: #2D2E40 !important;
   background-image: url("../image/play.png") !important;
@@ -43,6 +46,7 @@ body {
       font-size: 15px;
       height: 40px;
       margin: .5em 0;
+      outline: 0;
       padding: 0 0.8em; }
     .section .header__main .header__search-icon {
       color: #FDFDFD;

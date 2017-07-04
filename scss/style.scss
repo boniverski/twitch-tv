@@ -18,7 +18,7 @@ $radius: 0.25em;
   font-family: Comfortaa, Helvetica, sans-serif;
   text-decoration: none !important;
 }
-
+html {overflow-y: scroll;}
 body {
   background: $background !important;
   background-image: url("../image/play.png") !important;
@@ -58,6 +58,7 @@ body {
       font-size: 15px;
       height: 40px;
       margin: .5em 0;
+      outline: 0;
       padding: 0 0.8em;
     }
     .header__search-icon {
