@@ -12,7 +12,7 @@ $(document).ready(function() {
     $.getJSON(makeURL("streams", channel), function(data) {
 
       var streamInfo, status;
-      var defaultAvatar = '../image/twitch-icon.png'
+      var defaultAvatar = 'image/twitch-icon.png'
 
       if (data.stream === null) {
         streamInfo = "";
