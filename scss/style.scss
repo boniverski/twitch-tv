@@ -79,10 +79,12 @@ body {
         height: 2em;
         padding-bottom: 1em;
         transition: all .12s ease-in-out;
+        cursor: pointer;
       }
-      .availability__btn--on:hover {box-shadow: inset 0 -3px 0 0 $online};
-      .availability__btn--off:hover {box-shadow: inset 0 -3px 0 0 $offline};
-      .availability__btn--all:hover {box-shadow: inset 0 -3px 0 0 $all};
+      .availability__btn--on:hover, .active-on-btn {box-shadow: inset 0 -3px 0 0 $online}
+      .availability__btn--off:hover, .active-off-btn {box-shadow: inset 0 -3px 0 0 $offline}
+      .availability__btn--all:hover, .active-all-btn {box-shadow: inset 0 -3px 0 0 $all}
+      .availability__btn--on:focus, .availability__btn--off:focus, .availability__btn--all:focus {outline: 0;}
   }
 }
 
@@ -97,8 +99,8 @@ body {
       position: relative;
       .user__avatar {
         flex-grow: 0;
-        max-height: 100px;
-        max-width: 100px;
+        max-height: 80px;
+        max-width: 80px;
       }
       .user__card {
         flex-grow: 2;
@@ -116,7 +118,6 @@ body {
       .user__availability--on {
         background: $online;
         box-shadow: 0px 0 10px rgba(150, 201, 61, 0.5);
-        display: none;
       }
       .user__availability--off {
         background: $offline;
@@ -124,3 +125,5 @@ body {
       }
     }
   }
+
+  .hidden {display: none !important;}
