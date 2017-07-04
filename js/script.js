@@ -1,7 +1,6 @@
 var users = ["MedryBW", "ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp", "storbeck", "habathcx", "RobotCaleb", "noobs2ninjas"];
 
-$(document).ready(function getUser() {
-
+$(document).ready(function() {
   $(".availability__btn--all").addClass("active-all-btn");
 
   users.forEach(function(channel){
@@ -29,6 +28,7 @@ $(document).ready(function getUser() {
         var avatar = data.logo != null ? data.logo : "http://4playernetwork.com/static/images/buttons/twitch-icon-lt.png",
             user = data.display_name != null ? data.display_name : channel,
             game = streamInfo ? ' ' + data.status : "";
+            url = data.url;
 
         var statusIndicator, addClass;
             if (status === "online") {
@@ -39,14 +39,14 @@ $(document).ready(function getUser() {
               addClass = 'offline';
             }
 
-        var html = '<div class="user' + ' ' + addClass + '"><img class="user__avatar" src="' + avatar + '" alt="' + user + '"><div class="user__card"><h4 class="user--name">' + user + '</h4><p class="user--stream-info">' + game + '</p></div>' + statusIndicator + '</div>';
+        var html = '<div class="user' + ' ' + addClass + '"><img class="user__avatar" src="' + avatar + '" alt="' + user + '"><div class="user__card"><a href="' + url + '" target="_blank"><h4 class="user--name">' + user + '</h4></a><p class="user--stream-info">' + game + '</p></div>' + statusIndicator + '</div>';
             $(".main").append(html);
 
+        $(".load-bar").hide(300);
       });
     });
   })
-});
-$(document).ready(function(){
+
   $(".availability__btn").click(function() {
       // $(".availability__btn--all").removeClass("active-all-btn");
       // $(this).addClass("active-all-btn");
@@ -70,4 +70,4 @@ $(document).ready(function(){
       $(".availability__btn--all").removeClass("active-all-btn");
     }
   })
-})
+});

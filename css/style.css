@@ -11,7 +11,8 @@ html {
 body {
   background: #2D2E40 !important;
   background-image: url("../image/play.png") !important;
-  background-repeat: repeat; }
+  background-repeat: repeat;
+  margin: 0; }
 
 .container {
   max-width: 600px;
@@ -108,5 +109,44 @@ body {
 
 .hidden {
   display: none !important; }
+
+.load-bar {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 6px;
+  background-color: #FAE840; }
+  .load-bar .bar {
+    content: "";
+    display: inline;
+    position: absolute;
+    width: 0;
+    height: 100%;
+    left: 50%;
+    text-align: center; }
+  .load-bar .bar:nth-child(1) {
+    background-color: #E74548;
+    animation: loading 3s linear infinite; }
+  .load-bar .bar:nth-child(2) {
+    background-color: #3b78e7;
+    animation: loading 3s linear 0.3s infinite; }
+  .load-bar .bar:nth-child(3) {
+    background-color: #96C93D;
+    animation: loading 3s linear 0.6s infinite; }
+  .load-bar .bar:nth-child(4) {
+    background-color: #FAE840;
+    animation: loading 3s linear 0.9s infinite; }
+@keyframes loading {
+  from {
+    left: 50%;
+    width: 0;
+    z-index: 100; }
+  33.3333% {
+    left: 0;
+    width: 100%;
+    z-index: 10; }
+  to {
+    left: 0;
+    width: 100%; } }
 
 /*# sourceMappingURL=style.css.map */
