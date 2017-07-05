@@ -169,7 +169,7 @@ body {
 
 /* Hiding certain elements */
 .mario {
-  position: absolute;
+  position: fixed;
   bottom: -5px;
   left: 5%;
   margin-bottom: 0; }
