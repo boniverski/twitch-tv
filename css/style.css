@@ -1,5 +1,6 @@
 /*--- VARIABLES AND MIXINS ---*/
 /*----------------------------*/
+/*-------- BASIC STYLE -------*/
 * {
   box-sizing: border-box;
   font-family: Comfortaa, Helvetica, sans-serif;
@@ -18,6 +19,8 @@ body {
   max-width: 600px;
   margin: 0 auto; }
 
+/*---------------------------------*/
+/*----- SECTION STYLE: HEADER------*/
 .section {
   background-color: #3D3D55;
   border-radius: 0.25em;
@@ -76,6 +79,8 @@ body {
     .section .availability .availability__btn--on:focus, .section .availability .availability__btn--off:focus, .section .availability .availability__btn--all:focus {
       outline: 0; }
 
+/*-----------------------------------------*/
+/*----- SECTION STYLE: STREAMERS LIST------*/
 .main {
   padding: 0.4em 0.4em !important; }
   .main .user {
@@ -92,6 +97,17 @@ body {
     .main .user .user__card {
       flex-grow: 2;
       padding: 1em 0 0 1em; }
+      .main .user .user__card a {
+        color: #24292E; }
+        .main .user .user__card a:hover {
+          color: #3b78e7; }
+      .main .user .user__card h4 {
+        margin: 0; }
+      .main .user .user__card p {
+        color: #24292E;
+        font-size: 0.8em;
+        display: inline-block;
+        padding: 0.2em 0; }
     .main .user .user__availability {
       position: absolute;
       flex-grow: 1;
@@ -107,9 +123,8 @@ body {
       background: #E74548;
       box-shadow: 0px 0 10px rgba(231, 69, 72, 0.5); }
 
-.hidden {
-  display: none !important; }
-
+/*--------------------------------*/
+/*------- LOADIN BAR STYLE -------*/
 .load-bar {
   position: absolute;
   top: 0;
@@ -148,5 +163,19 @@ body {
   to {
     left: 0;
     width: 100%; } }
+/*--------------------------------*/
+.hidden {
+  display: none !important; }
+
+/* Hiding certain elements */
+.mario {
+  position: absolute;
+  bottom: -5px;
+  left: 5%;
+  margin-bottom: 0; }
+
+@media (max-width: 870px) {
+  .mario {
+    display: none; } }
 
 /*# sourceMappingURL=style.css.map */

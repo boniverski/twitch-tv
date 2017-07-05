@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Twitch.tv</title>
     <link href="https://fonts.googleapis.com/css?family=Comfortaa:400,700&amp;subset=cyrillic-ext" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
@@ -10,35 +11,36 @@
     <script type="text/javascript" src="js/script.js"></script>
   </head>
   <body>
+
+    <!-- Loading bar while Twitch API is getting ready -->
     <div class="load-bar">
       <div class="bar"></div>
       <div class="bar"></div>
       <div class="bar"></div>
       <div class="bar"></div>
-    </div>
+    </div> <!-- End Loading bar -->
 
-    <div class="container">
+    <div class="container"> <!-- Main container for all elements-->
 
-      <div class="section header">
+      <div class="section"> <!-- Header with icon, search bar and buttons-->
         <div class="header__main">
           <a href="index.html" title="Twitch.tv"><i class="fa fa-twitch header__logo" aria-hidden="true"></i></a>
           <input class="header__input" type="search" name="" value="" data-search placeholder="Find a streamer">
           <span class="header__search-icon"><i class="fa fa-search" aria-hidden="true"></i>
 </span>
         </div>
-        <div class="availability">
+
+        <div class="availability"> <!-- All / Online / Offlne Buttons -->
           <button class="availability__btn availability__btn--all" id="all" type="button" name="button">All</button>
           <button class="availability__btn availability__btn--on" id="on" type="button" name="button">Online</button>
           <button class="availability__btn availability__btn--off" id="off" type="button" name="button">Offline</button>
-        </div>
-      </div>
+        </div> <!-- End Buttons-->
+      </div> <!-- End Header -->
 
-      <div class="section main">
+      <div class="section main"></div>
+    </div> <!-- End Main container-->
 
-          <!-- <span class="user__availability user__availability--on"></span>
-          <span class="user__availability user__availability--off"></span> -->
+    <img class="mario" src="image/mario.png" alt="super mario" title="Hello, world!">
 
-      </div>
-    </div>
   </body>
 </html>

@@ -1,9 +1,11 @@
 /*--- VARIABLES AND MIXINS ---*/
 $background: #2D2E40;
 $section: #3D3D55;
+$default-text: #24292E;
 $online: #96C93D;
 $offline: #E74548;
 $all: #FAE840;
+$blue: #3b78e7;
 $white: #FDFDFD;
 $radius: 0.25em;
 @mixin box-shadow($shadow...) {
@@ -13,6 +15,7 @@ $radius: 0.25em;
 }
 /*----------------------------*/
 
+/*-------- BASIC STYLE -------*/
 * {
   box-sizing: border-box;
   font-family: Comfortaa, Helvetica, sans-serif;
@@ -31,6 +34,9 @@ body {
   margin: 0 auto;
 }
 
+/*---------------------------------*/
+
+/*----- SECTION STYLE: HEADER------*/
 .section {
   background-color: $section;
   border-radius: $radius;
@@ -89,6 +95,9 @@ body {
       .availability__btn--on:focus, .availability__btn--off:focus, .availability__btn--all:focus {outline: 0;}
   }
 }
+/*-----------------------------------------*/
+
+/*----- SECTION STYLE: STREAMERS LIST------*/
 
 .main {
   padding: 0.4em 0.4em !important;
@@ -99,6 +108,8 @@ body {
       margin: 0.5em;
       padding: 0.6em;
       position: relative;
+      // transition: all .2s ease-in-out;
+      // &:hover { transform: scale(1.04); };
 
       .user__avatar {
         flex-grow: 0;
@@ -108,6 +119,21 @@ body {
       .user__card {
         flex-grow: 2;
         padding: 1em 0 0 1em;
+        a {
+          color: $default-text;
+          &:hover {
+            color: $blue;
+          }
+        }
+        h4 {
+          margin: 0;
+        }
+        p {
+          color: $default-text;
+          font-size: 0.8em;
+          display: inline-block;
+          padding: 0.2em 0;
+        }
       }
       .user__availability {
         position: absolute;
@@ -128,9 +154,9 @@ body {
       }
     }
   }
+/*--------------------------------*/
 
-.hidden {display: none !important;}
-
+/*------- LOADIN BAR STYLE -------*/
 .load-bar {
   position: absolute;
   top: 0;
@@ -151,7 +177,7 @@ body {
     animation: loading 3s linear infinite;
   }
   .bar:nth-child(2) {
-    background-color: #3b78e7;
+    background-color: $blue;
     animation: loading 3s linear 0.3s infinite;
   }
   .bar:nth-child(3) {
@@ -166,5 +192,22 @@ body {
       from {left: 50%; width: 0;z-index:100;}
       33.3333% {left: 0; width: 100%;z-index: 10;}
       to {left: 0; width: 100%;}
+  }
+}
+
+/*--------------------------------*/
+
+.hidden {display: none !important;} /* Hiding certain elements */
+
+.mario {
+  position: absolute;
+  bottom: -5px;
+  left: 5%;
+  margin-bottom: 0;
+}
+
+@media (max-width: 870px) {
+  .mario {
+    display: none;
   }
 }
