@@ -52,11 +52,6 @@ body {
       margin: .5em 0;
       outline: 0;
       padding: 0 0.8em; }
-    .section .header__main .header__search-icon {
-      color: #FDFDFD;
-      right: 15px;
-      top: 18px;
-      position: absolute; }
   .section .availability {
     display: flex;
     margin-top: 0.5em;
@@ -96,7 +91,7 @@ body {
       max-width: 80px; }
     .main .user .user__card {
       flex-grow: 2;
-      padding: 1em 0 0 1em; }
+      padding: 0.5em 0 0 1em; }
       .main .user .user__card a {
         color: #24292E; }
         .main .user .user__card a:hover {
@@ -107,7 +102,8 @@ body {
         color: #24292E;
         font-size: 0.8em;
         display: inline-block;
-        padding: 0.2em 0; }
+        padding: 0.2em 0;
+        margin-bottom: 0; }
     .main .user .user__availability {
       position: absolute;
       flex-grow: 1;

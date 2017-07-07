@@ -10,7 +10,6 @@ var users = ["MedryBW", "ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp", "s
 
 // Running code on ready state
 $(document).ready(function() {
-  $(".availability__btn--all").addClass("active-all-btn"); //Active "All" button
 
   // Iterating through "users" array
   users.forEach(function getUsers(channel){
@@ -56,6 +55,7 @@ $(document).ready(function() {
         // Making user's card in results
         var html = '<div class="user' + ' ' + addClass + '" data-filter-item data-filter-name="' + searchQuery + '"><img class="user__avatar" src="' + avatar + '"><div class="user__card"><a href="' + url + '" target="_blank"><h4 class="user--name">' + user + '</h4></a><p class="user--stream-info">' + game + '</p></div>' + statusIndicator + '</div>';
         $(html).hide().appendTo(".main").fadeIn(300);
+        $(".availability__btn--all").addClass("active-all-btn"); //Active "All" button
         $(".load-bar").hide(300); // Hiding loading bar when data is ready
 
         // Setting up search bar

@@ -68,12 +68,6 @@ body {
       outline: 0;
       padding: 0 0.8em;
     }
-    .header__search-icon {
-      color: $white;
-      right: 15px;
-      top: 18px;
-      position: absolute;
-    }
   }
   .availability {
     display: flex;
@@ -118,7 +112,7 @@ body {
       }
       .user__card {
         flex-grow: 2;
-        padding: 1em 0 0 1em;
+        padding: 0.5em 0 0 1em;
         a {
           color: $default-text;
           &:hover {
@@ -133,6 +127,7 @@ body {
           font-size: 0.8em;
           display: inline-block;
           padding: 0.2em 0;
+          margin-bottom: 0;
         }
       }
       .user__availability {
