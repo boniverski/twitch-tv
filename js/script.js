@@ -1,5 +1,5 @@
 /*
- * Title: Twitch.tv JSON API (for FreeCodeCamp), July 2017
+ * Title: Twitch.tv JSON API v1 (for freeCodeCamp), July 2017
  * Author: Boško Rabrenović
  * https://github.com/boniverski/twitch-tv
  * Description: Twitch.tv App monitors the state of selected Twitch and filters their profiles based on the stream status.
@@ -10,6 +10,7 @@ var users = ["MedryBW", "ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp", "s
 
 // Running code on ready state
 $(document).ready(function() {
+  //$(".availability__btn--all").addClass("active-all-btn"); //Active "All" button
 
   // Iterating through "users" array
   users.forEach(function getUsers(channel){
@@ -17,11 +18,11 @@ $(document).ready(function() {
       return 'https://wind-bow.gomix.me/twitch-api/' + type + '/' + name + '?callback=?';
     };
 
-    // Checking for user's stream statuss
+    // Checking for user's stream status
     $.getJSON(makeURL("streams", channel), function(data) {
 
-      var streamInfo, status;
-      var defaultAvatar = 'image/twitch-icon.png'; //If there's no user's avatar
+      var streamInfo, status,
+          defaultAvatar = 'https://raw.githubusercontent.com/boniverski/twitch-tv/master/image/twitch-icon.png'; //If there's no user's avatar
 
       if (data.stream === null) {
         streamInfo = "";
@@ -38,33 +39,33 @@ $(document).ready(function() {
       $.getJSON(makeURL("channels", channel), function(data) {
         var avatar = data.logo != null ? data.logo : defaultAvatar,
             user = data.display_name != null ? data.display_name : channel,
-            game = streamInfo ? " " + data.status : "";
-            url = data.url;
+            game = streamInfo ? " " + data.status : "",
+            url = data.url,
             searchQuery = user.toLowerCase();
 
         // Setting online/fffline indicator in user's card
         var statusIndicator, addClass;
             if (status === "online") {
-              statusIndicator = '<span class="user__availability user__availability--on"></span>';
+              statusIndicator = '<span class="user__availability user__availability--on" title="Online"></span>';
               addClass = 'online';
             } else {
-              statusIndicator = '<span class="user__availability user__availability--off"></span>';
+              statusIndicator = '<span class="user__availability user__availability--off" title="Offline"></span>';
               addClass = 'offline';
             }
 
-        // Making user's card in results
-        var html = '<div class="user' + ' ' + addClass + '" data-filter-item data-filter-name="' + searchQuery + '"><img class="user__avatar" src="' + avatar + '"><div class="user__card"><a href="' + url + '" target="_blank"><h4 class="user--name">' + user + '</h4></a><p class="user--stream-info">' + game + '</p></div>' + statusIndicator + '</div>';
+        // Displays user's card in results
+        var html = `<div class="user ${addClass}" data-filter-item data-filter-name="${searchQuery}"><a href="${url}" target="_blank"><img class="user__avatar" src="${avatar}"></a><div class="user__card"><a href="${url}" target="_blank"><h4 class="user--name">${user}</h4></a><p class="user--stream-info">${game}</p></div>${statusIndicator}</div>`;
         $(html).hide().appendTo(".main").fadeIn(300);
-        $(".availability__btn--all").addClass("active-all-btn"); //Active "All" button
         $(".load-bar").hide(300); // Hiding loading bar when data is ready
+        $(".availability__btn--all").addClass("active-all-btn"); //Active "All" button
 
         // Setting up search bar
         $("[data-search]").on("keyup", function() {
-        	var searchVal = $(this).val();
+        	var searchVal = $(this).val().toLowerCase();
         	var filterItems = $("[data-filter-item]");
         	if (searchVal != "") {
         		filterItems.addClass("hidden");
-        		$('[data-filter-item][data-filter-name*="' + searchVal.toLowerCase() + '"]').removeClass("hidden");
+        		$(`[data-filter-item][data-filter-name*="${searchVal}"]`).removeClass("hidden");
         	} else {
         		filterItems.removeClass("hidden");
         	}

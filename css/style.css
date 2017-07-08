@@ -97,6 +97,7 @@ body {
         .main .user .user__card a:hover {
           color: #3b78e7; }
       .main .user .user__card h4 {
+        display: inline-block;
         margin: 0; }
       .main .user .user__card p {
         color: #24292E;
