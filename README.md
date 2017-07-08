@@ -1,4 +1,4 @@
-# **[Twitch.tv Streamers]**(https://boniverski.github.io/twitch-tv)
+# **[Twitch.tv Streamers](https://boniverski.github.io/twitch-tv)**
 
 
 ## * *Twitch.tv JSON API* *- freeCodeCamp Intermediate Project, July 2017
