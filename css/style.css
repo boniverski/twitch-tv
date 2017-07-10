@@ -102,7 +102,7 @@ body {
       .main .user .user__card p {
         color: #24292E;
         font-size: 0.8em;
-        display: inline-block;
+        display: block;
         padding: 0.2em 0;
         margin-bottom: 0; }
     .main .user .user__availability {
