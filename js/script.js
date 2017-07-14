@@ -6,7 +6,7 @@
  */
 
 // Twitch users
-var users = ["MedryBW", "ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp", "storbeck", "habathcx", "RobotCaleb", "noobs2ninjas"];
+var users = ["MedryBW", "ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp", "storbeck", "habathcx", "RobotCaleb", "noobs2ninjas", "batmaaan"];
 
 // Running code on ready state
 $(document).ready(function() {
@@ -42,6 +42,12 @@ $(document).ready(function() {
             game = streamInfo ? " " + data.status : "",
             url = data.url,
             searchQuery = user.toLowerCase();
+	
+	//Check if user exist
+        if (data.error) {
+          game = "This user does not exit or the account is closed.";
+          status = "offline";
+        }
 
         // Setting online/fffline indicator in user's card
         var statusIndicator, addClass;
