@@ -1,29 +1,21 @@
-import React, { Component } from 'react';
-import './App.css';
+import React, {Component} from 'react';
+import User from './User';
 import $ from 'jquery';
-
-let users = ["MedryBW", "ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp", "storbeck", "habathcx", "RobotCaleb", "noobs2ninjas", "batmaaan"];
 
 const makeURL = (type, name) => {
   return 'https://wind-bow.gomix.me/twitch-api/' + type + '/' + name + '?callback=?';
 }
-let ProfileTile = () => {
-    return (
-      <div>
-        <div>{this.props.name}</div>
-        <div>{this.props.avatar}</div>
-        <div>{this.props.game}</div>
-        <div>{this.props.url}</div>
-      </div>
-    )
-}
 
-class ProfileList extends Component {
+class List extends Component {
+  static defaultProps = {
+    users: ["MedryBW", "ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp", "storbeck", "habathcx", "RobotCaleb", "noobs2ninjas", "batmaaan"]
+  }
+
   constructor(props) {
     super(props);
 
     this.state = {
-      name: '',
+      username: '',
       avatar: 'https://raw.githubusercontent.com/boniverski/twitch-tv/v1/image/twitch-icon.png',
       online: false,
       stream: 'This account cannot be found',
@@ -33,7 +25,7 @@ class ProfileList extends Component {
   }
 
   componentDidMount() {
-    users.forEach(user => {
+    this.props.users.map(user => {
       $.getJSON(makeURL('streams', user), (data) => {
         //console.log(data);
         this.setState({
@@ -41,10 +33,11 @@ class ProfileList extends Component {
           stream: data.stream !== null ? data.stream.game : ''
         })
 
-        $.getJSON(makeURL('channels', user)) .then((data) => {
+        $.getJSON(makeURL('channels', user))
+         .then((data) => {
           this.setState({
             avatar: data.logo !== null ? data.logo : this.state.avatar,
-            name: data.display_name !== null ? data.display_name : user,
+            username: data.display_name !== null ? data.display_name : user,
             game: this.state.stream ? ' ' + data.status : '',
             url: data.url
           })
@@ -58,24 +51,11 @@ class ProfileList extends Component {
 
   render() {
     return (
-      <div className="App">
-        users.map((data, i) => {
-          <ProfileTile user={data} key={i} />
-        })
+      <div>
+        <User name={this.state.username} avatar={this.state.avatar} streamInfo={this.state.game} />
       </div>
-    );
-  }
-}
-
-class App extends Component {
-  render() {
-    return(
-      users.map((data, i) => {
-        return <ProfileList user={data} key={i} />
-      })
-
     )
   }
 }
 
-export default App;
+export default List;
