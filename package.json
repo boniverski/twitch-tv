@@ -1,27 +1,20 @@
 {
-  "name": "twitch-tv",
-  "version": "2.0.0",
-  "private": true,
-  "homepage": "https://boniverski.github.io/twitch-tv",
-  "dependencies": {
-    "jquery": "^3.2.1",
-    "node-sass-chokidar": "0.0.3",
-    "npm-run-all": "^4.1.1",
-    "react": "^16.1.1",
-    "react-dom": "^16.1.1",
-    "react-scripts": "1.0.17"
-  },
+  "name": "gulpexapp",
+  "version": "1.5.0",
+  "description": "Twitch.tv Streamers",
+  "main": "script.js",
   "scripts": {
-    "start": "npm-run-all -p watch-css start-js",
-    "start-js": "react-scripts start",
-    "build-css": "node-sass-chokidar src/ -o src/",
-    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
-    "build-js": "react-scripts build",
-    "deploy": "npm run build&&gh-pages -d build --branch gh-pages --repo https://github.com/boniverski/twitch-tv",
-    "build": "npm-run-all build-css build-js"
+    "test": " "
   },
+  "author": "Boško Rabrenović",
+  "license": "ISC",
   "devDependencies": {
-    "webpack": "^3.8.1",
-    "gh-pages": "^1.0.0"
-  }
+    "browser-sync": "*",
+    "gulp": "*",
+    "gulp-autoprefixer": "*",
+    "gulp-minify-css": "*",
+    "gulp-sass": "*",
+    "gulp-uglify": "*"
+  },
+  "dependencies": {}
 }
