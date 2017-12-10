@@ -1,5 +1,5 @@
 const gulp         = require('gulp');
-const uglify	   = require('gulp-uglify');
+//const uglify	     = require('gulp-uglify');
 const sass         = require('gulp-sass');
 const minifyCss    = require('gulp-minify-css');
 const bs           = require('browser-sync').create();
@@ -12,10 +12,9 @@ gulp.task('copyHtml', function () {
       .pipe(bs.reload({stream: true}));
 });
 
-// MINIFY JS
-gulp.task('minify', function() {
+//COPY JS
+gulp.task('copyJs', function() {
   gulp.src('src/js/*.js')
-      .pipe(uglify())
       .pipe(gulp.dest('dist'))
       .pipe(bs.reload({stream: true}));
 });
@@ -42,6 +41,6 @@ gulp.task('browser-sync', function() {
 //GULP RUN
 gulp.task('default', ['browser-sync'], function () {
     gulp.watch('src/*.html', ['copyHtml']);
-    gulp.watch('src/js/*.js', ['minify']);
+    gulp.watch('src/js/*.js', ['copyJs']);
     gulp.watch('src/scss/*.scss', ['sass']);
 });
