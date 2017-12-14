@@ -37,7 +37,7 @@ $(document).ready(function() {
                           <p>${userObj.onlineStatus}</p>
                         </div>
                         `
-        $('#root').append(userDiv);
+      
       });
     });
   })
