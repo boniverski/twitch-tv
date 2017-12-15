@@ -13,16 +13,16 @@ body, html {
   justify-content: center;
   .app {
     display: grid;
-    width: 700px;
-    grid-template-columns: 150px 550px;
+    width: 600px;
+    grid-template-columns: 140px 440px;
     grid-template-rows: 100px 500px;
     grid-gap: 10px;
     grid-template-areas:
-                          "l l l"
+                          "h h h"
                           "s u u";
     &_header {
       background: red;
-      grid-area: l;
+      grid-area: h;
     }
     &_status-buttons {
       background: blue;
@@ -36,6 +36,15 @@ body, html {
         line-height: calc(500px/3);
       }
     }
-    &_users {background: yellow; grid-area: u; }
+    &_users {
+      background: yellow;
+      grid-area: u;
+      overflow-y: scroll;
+      .user-tab {
+        .info-collapse {
+          display: none;
+        }
+      }
+    }
   }
 }

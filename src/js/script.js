@@ -29,15 +29,18 @@ $(document).ready(function() {
           })()
         }
 
-        const userDiv = `
-                        <div>
+        const user = `
+                        <div class='user-tab'>
                           <h2>${userObj.name}</h2>
-                          <p>${userObj.streamInfo}</p>
-                          <img src="${userObj.avatar}" alt="avatar" />
                           <p>${userObj.onlineStatus}</p>
+
+                          <div class='info-collapse'>
+                            <p>${userObj.streamInfo}</p>
+                            <img src="${userObj.avatar}" alt="avatar" />
+                          </div>
                         </div>
                         `
-      
+      $('.app_users').append(user);
       });
     });
   })
