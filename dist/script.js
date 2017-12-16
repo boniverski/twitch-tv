@@ -8,18 +8,31 @@ $(document).ready(function() {
   }
 
   usernames.forEach(user => {
+    const username = user;
+
     $.getJSON(makeURL('streams', user), (data) => {
 
       let streamInfo = data.stream === null ? '' : data.stream.game,
           status     = data.stream === null ? 'Offline' : 'Online',
           defaultAvatar = 'https://raw.githubusercontent.com/boniverski/twitch-tv/v1/image/twitch-icon.png';
 
-      $.getJSON(makeURL('channels', user), (data) => {
+      $.getJSON(makeURL('channels', username), (data) => {
+        console.log(data)
         const userObj = {
 
-          name: (data.display_name === null || data.error) ? user : data.display_name,
+          name: (data.display_name === null || data.error) ? username : data.display_name,
           avatar: (data.logo === null || data.error) ? defaultAvatar : data.logo,
-          onlineStatus: status ? status : !status,
+          url: (data.display_name === null || data.error) ? '' : `href='${data.url}' targe='_blank'`,
+          followers: (data.display_name === null || data.error) ? '' :  `Followers: ${data.followers}`,
+
+          onlineStatus: (function () {
+            if(!data.error) {
+              if(status) {return status;}
+              else {return !status;}
+            }
+            return '';
+          })(),
+
           streamInfo: (function() {
             if(!data.error) {
               if(streamInfo) {return data.status;}
@@ -30,18 +43,24 @@ $(document).ready(function() {
         }
 
         const user = `
-                        <div class='user-tab'>
-                          <h2>${userObj.name}</h2>
-                          <p>${userObj.onlineStatus}</p>
-
-                          <div class='info-collapse'>
-                            <p>${userObj.streamInfo}</p>
-                            <img src="${userObj.avatar}" alt="avatar" />
-                          </div>
+                      <div class='user-tab'>
+                        <div class='avatar'>
+                          <img src='${userObj.avatar}' alt="avatar" />
                         </div>
-                        `
-      $('.app_users').append(user);
+                        <div>
+                          <a ${userObj.url}>
+                            <h2>${userObj.name}</h2>
+                          </a>
+                          <p>${userObj.streamInfo}</p>
+                        </div>
+                        <div>
+                          <p>${userObj.onlineStatus}<p>
+                          <p>${userObj.followers}</p>
+                        </div>
+                      </div>
+                      `
+        $('.app_users').append(user);
       });
     });
-  })
+  });
 });
