@@ -39,11 +39,12 @@ $(document).ready(function() {
               else {return '';}
             }
             return 'This user does not exist';
-          })()
+          })(),
+          searchQuery: username.toLowerCase()
         }
 
         const user = `
-                      <div class='user-tab'>
+                      <div class='user-tab border-radius' data-filter-item data-filter-name="${userObj.searchQuery}">
                         <div class='avatar'>
                           <img src='${userObj.avatar}' alt="avatar" />
                         </div>
@@ -59,7 +60,18 @@ $(document).ready(function() {
                         </div>
                       </div>
                       `
+
         $('.app_users').append(user);
+
+        $('input').on('keyup', () => {
+          let query = $('input').val().toLowerCase();
+          let filteredUser = $('[data-filter-item]');
+
+          if (query != '') {
+            filteredUser.addClass('hidden');
+            $(`.user-tab[data-filter-name*="${query}"]`).removeClass('hidden'); }
+          else { filteredUser.removeClass('hidden'); }
+        });
       });
     });
   });

@@ -1,9 +1,25 @@
-* { box-sizing: border-box; }
+$darkgray: #070000;
+$purple: #443757;
+$yellow: #FAE840;
+$green: #9CFF4C;
+$red: #E74548;
+$lightgray: rgba(0, 0, 0, .1);
+
+* {
+  box-sizing: border-box;
+  font-family: "Comfortaa", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+}
 
 body, html {
   height: 100%;
   margin: 0;
+  background: #fdfdfd;
 }
+
+section { box-shadow: 0 0 15px rgba(0, 0, 0, .2); }
+
+.border-radius {border-radius: 5px;}
 
 .container {
   width: 100%;
@@ -13,19 +29,37 @@ body, html {
   justify-content: center;
   .app {
     display: grid;
-    width: 600px;
-    grid-template-columns: 140px 440px;
+    width: 650px;
+    grid-template-columns: 100px 510px;
     grid-template-rows: 100px 500px;
     grid-gap: 10px;
     grid-template-areas:
                           "h h h"
                           "s u u";
     &_header {
-      background: red;
       grid-area: h;
+      background: linear-gradient(30deg, #d2ff52 0%, #03fff3 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .logo {
+        width: 20%;
+        color: white;
+        font-size: 3rem;
+        text-align: center;
+      }
+      input {
+        width: 80%;
+        height: 50%;
+        border: 1.5px solid rgba(0,0,0,.1);
+        margin-right: 25px;
+        padding-left: 10px;
+        font-size: 2rem;
+        color: $darkgray;
+        &::placeholder {color: $lightgray;}
+      }
     }
-    &_status-buttons {
-      background: blue;
+    &_buttons {
       grid-area: s;
       display: flex;
       flex-direction: column;
@@ -34,19 +68,41 @@ body, html {
         text-align: center;
         vertical-align: middle;
         line-height: calc(500px/3);
+        cursor: pointer;
+      }
+      .btn-all:hover {
+        background-color: $yellow;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+      }
+      .btn-on:hover {
+        background-color: $green;
+        color: white;
+      }
+      .btn-off:hover {
+        background-color: $red;
+        color: white;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
       }
     }
     &_users {
-      background: yellow;
       grid-area: u;
       overflow-y: scroll;
       .user-tab {
         display: flex;
+        border: .5px solid $lightgray;
+        margin: 10px;
         * {flex: 1}
         .avatar img {
+          border-radius: 50%;
+          padding: 10px;
           width: 100px;
+          height: 100%;
         }
       }
     }
   }
 }
+
+.hidden {display: none !important;}
