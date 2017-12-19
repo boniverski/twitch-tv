@@ -24,14 +24,7 @@ $(document).ready(function() {
           avatar: (data.logo === null || data.error) ? defaultAvatar : data.logo,
           url: (data.display_name === null || data.error) ? '' : `href='${data.url}' targe='_blank'`,
           followers: (data.display_name === null || data.error) ? '' :  `Followers: ${data.followers}`,
-
-          onlineStatus: (function () {
-            if(!data.error) {
-              if(status) {return status;}
-              else {return !status;}
-            }
-            return '';
-          })(),
+          onlineStatus: status,
 
           streamInfo: (function() {
             if(!data.error) {
@@ -44,7 +37,7 @@ $(document).ready(function() {
         }
 
         const user = `
-                      <div class='user-tab border-radius' data-filter-item data-filter-name="${userObj.searchQuery}">
+                      <div class='user-tab border-radius' data-filter-item data-filter-name="${userObj.searchQuery}" data-filter="${userObj.onlineStatus}">
                         <div class='avatar'>
                           <img src='${userObj.avatar}' alt="avatar" />
                         </div>
@@ -71,8 +64,20 @@ $(document).ready(function() {
             filteredUser.addClass('hidden');
             $(`.user-tab[data-filter-name*="${query}"]`).removeClass('hidden'); }
           else { filteredUser.removeClass('hidden'); }
+
         });
       });
     });
   });
+});
+
+$('.button').click(function() {
+  let status = $(this).attr('id');
+  if(status === 'on') {
+    $('.user-tab').filter('[data-filter="Offline"]').css('display', 'none');
+    $('.user-tab').filter('[data-filter="Online"]').css('display', 'flex');
+  } else if (status === 'off') {
+    $('.user-tab').filter('[data-filter="Offline"]').css('display', 'flex');
+    $('.user-tab').filter('[data-filter="Online"]').css('display', 'none');
+  }
 });
