@@ -10,74 +10,80 @@ $(document).ready(function() {
   usernames.forEach(user => {
     const username = user;
 
-    $.getJSON(makeURL('streams', user), (data) => {
-
+    $.getJSON(makeURL('streams', username), (data) => {
       let streamInfo = data.stream === null ? '' : data.stream.game,
           status     = data.stream === null ? 'Offline' : 'Online',
           defaultAvatar = 'https://raw.githubusercontent.com/boniverski/twitch-tv/v1/image/twitch-icon.png';
 
       $.getJSON(makeURL('channels', username), (data) => {
-        console.log(data)
-        const userObj = {
-
+        const user = {
           name: (data.display_name === null || data.error) ? username : data.display_name,
           avatar: (data.logo === null || data.error) ? defaultAvatar : data.logo,
-          url: (data.display_name === null || data.error) ? '' : `href='${data.url}' targe='_blank'`,
+          url: (data.display_name === null || data.error) ? '' : `href='${data.url}'`,
           followers: (data.display_name === null || data.error) ? '' :  `Followers: ${data.followers}`,
           onlineStatus: status,
-
+          searchQuery: username.toLowerCase(),
           streamInfo: (function() {
             if(!data.error) {
-              if(streamInfo) {return data.status;}
-              else {return '';}
+              if(streamInfo) { return data.status; }
+              else { return ''; }
             }
             return 'This user does not exist';
-          })(),
-          searchQuery: username.toLowerCase()
+          })()
         }
 
-        const user = `
-                      <div class='user-tab border-radius' data-filter-item data-filter-name="${userObj.searchQuery}" data-filter="${userObj.onlineStatus}">
-                        <div class='avatar'>
-                          <img src='${userObj.avatar}' alt="avatar" />
-                        </div>
-                        <div>
-                          <a ${userObj.url}>
-                            <h2>${userObj.name}</h2>
+        const userTile = `
+                      <div class='user-tab border-radius' data-filter-item data-filter-name="${user.searchQuery}" data-filter="${user.onlineStatus}">
+                        <div class='user-avatar'>
+                          <a ${user.url} target='_blank'>
+                            <img src='${user.avatar}' alt="avatar" />
                           </a>
-                          <p>${userObj.streamInfo}</p>
                         </div>
-                        <div>
-                          <p>${userObj.onlineStatus}<p>
-                          <p>${userObj.followers}</p>
+                        <div class='user-main-info'>
+                          <a ${user.url} target='_blank'>
+                            <h2>${user.name}</h2>
+                          </a>
+                          <p>${user.streamInfo}</p>
+                        </div>
+                        <div class='user-availability'>
+                          <p>${user.onlineStatus}</p>
+                          <p>${user.followers}</p>
                         </div>
                       </div>
                       `
 
-        $('.app_users').append(user);
+        $(userTile).hide().appendTo('.app_users').fadeIn('300');
 
         $('input').on('keyup', () => {
-          let query = $('input').val().toLowerCase();
-          let filteredUser = $('[data-filter-item]');
+          let $query = $('input').val().toLowerCase();
+          let $filteredUser = $('[data-filter-item]');
 
-          if (query != '') {
-            filteredUser.addClass('hidden');
-            $(`.user-tab[data-filter-name*="${query}"]`).removeClass('hidden'); }
-          else { filteredUser.removeClass('hidden'); }
+          if ($query != '') {
+            $filteredUser.addClass('hidden');
+            $(`.user-tab[data-filter-name*="${$query}"]`).removeClass('hidden'); }
+          else { $filteredUser.removeClass('hidden'); }
 
         });
       });
     });
   });
-});
 
-$('.button').click(function() {
-  let status = $(this).attr('id');
-  if(status === 'on') {
-    $('.user-tab').filter('[data-filter="Offline"]').css('display', 'none');
-    $('.user-tab').filter('[data-filter="Online"]').css('display', 'flex');
-  } else if (status === 'off') {
-    $('.user-tab').filter('[data-filter="Offline"]').css('display', 'flex');
-    $('.user-tab').filter('[data-filter="Online"]').css('display', 'none');
-  }
+  $('.button').click(function() {
+
+    let $status = $(this).attr('id');
+    const $offUsers = $('.user-tab').filter('[data-filter="Offline"]');
+    const $onUsers = $('.user-tab').filter('[data-filter="Online"]');
+
+    if($status === 'on') {
+      $offUsers.css('display', 'none');
+      $onUsers.css('display', 'flex');
+    } else if ($status === 'off') {
+      $offUsers.css('display', 'flex');
+      $onUsers.css('display', 'none');
+    } else if ($status === 'all') {
+      $('.user-tab').filter($offUsers, $onUsers).css('display', 'flex');
+    }
+
+  });
+
 });
